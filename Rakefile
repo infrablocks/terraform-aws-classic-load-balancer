@@ -3,10 +3,9 @@ require 'securerandom'
 require 'git'
 require 'semantic'
 
-require_relative 'lib/public_ip'
 require_relative 'lib/terraform'
 
-DEPLOYMENT_IDENTIFIER = SecureRandom.hex[0, 8]
+REPOSITORY_NAME = SecureRandom.hex[0, 8]
 
 Terraform::Tasks.install('0.8.6')
 
@@ -20,34 +19,34 @@ end
 
 namespace :provision do
   desc 'Provisions module in AWS'
-  task :aws, [:deployment_identifier] => ['terraform:ensure'] do |_, args|
-    deployment_identifier = args.deployment_identifier || DEPLOYMENT_IDENTIFIER
+  task :aws, [:repository_name] => ['terraform:ensure'] do |_, args|
+    repository_name = args.repository_name || REPOSITORY_NAME
     configuration_directory = Paths.from_project_root_directory('src')
 
-    puts "Provisioning with deployment identifier: #{deployment_identifier}"
+    puts "Provisioning for repository name: #{repository_name}"
 
     Terraform.clean
     Terraform.apply(
         directory: configuration_directory,
         vars: terraform_vars_for(
-            deployment_identifier: deployment_identifier))
+            repository_name: repository_name))
   end
 end
 
 namespace :destroy do
   desc 'Destroys module in AWS'
-  task :aws, [:deployment_identifier] => ['terraform:ensure'] do |_, args|
-    deployment_identifier = args.deployment_identifier || DEPLOYMENT_IDENTIFIER
+  task :aws, [:repository_name] => ['terraform:ensure'] do |_, args|
+    repository_name = args.repository_name || REPOSITORY_NAME
     configuration_directory = Paths.from_project_root_directory('src')
 
-    puts "Destroying with deployment identifier: #{deployment_identifier}"
+    puts "Destroying for repository name: #{repository_name}"
 
     Terraform.clean
     Terraform.destroy(
         directory: configuration_directory,
         force: true,
         vars: terraform_vars_for(
-            deployment_identifier: deployment_identifier))
+            repository_name: repository_name))
   end
 end
 
@@ -66,6 +65,6 @@ end
 def terraform_vars_for(opts)
   {
       region: 'eu-west-2',
-      deployment_identifier: opts[:deployment_identifier]
+      repository_name: opts[:repository_name]
   }
 end

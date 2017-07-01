@@ -3,6 +3,9 @@ Terraform AWS ECR Repository
 
 A Terraform module for building an ECR repository in AWS.
 
+Currently, this comprises of only the repository but may include a policy in
+future.
+
 Usage
 -----
 

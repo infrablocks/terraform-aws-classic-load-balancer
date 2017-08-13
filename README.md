@@ -1,6 +1,8 @@
 Terraform AWS ECR Repository
 ============================
 
+[![CircleCI](https://circleci.com/gh/infrablocks/terraform-aws-ecr-repository.svg?style=svg)](https://circleci.com/gh/infrablocks/terraform-aws-ecr-repository)
+
 A Terraform module for building an ECR repository in AWS.
 
 Currently, this comprises of only the repository but may include a policy in

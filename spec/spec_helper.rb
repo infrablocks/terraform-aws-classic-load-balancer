@@ -1,57 +1,22 @@
 require 'bundler/setup'
-require 'awspec'
-require 'support/shared_contexts/terraform'
-require 'securerandom'
+require 'ruby_terraform'
 
-require_relative '../lib/terraform'
+require 'support/shared_contexts/terraform'
+require 'support/terraform_module'
+
+RubyTerraform.configure do |c|
+  c.binary = Paths.from_project_root_directory(
+      'vendor', 'terraform', 'bin', 'terraform')
+end
 
 RSpec.configure do |config|
-  repository_name = ENV['REPOSITORY_NAME']
-
   config.example_status_persistence_file_path = '.rspec_status'
-
-  config.add_setting :region, default: 'eu-west-2'
-  config.add_setting :repository_name,
-                     default: repository_name || SecureRandom.hex[0, 8]
-
-  config.before(:suite) do
-    variables = RSpec.configuration
-    configuration_directory = Paths.from_project_root_directory('src')
-
-    puts
-    puts "Provisioning for repository name: #{variables.repository_name}"
-    puts
-
-    Terraform.clean
-    Terraform.apply(
-        directory: configuration_directory,
-        vars: {
-            region: variables.region,
-            repository_name: variables.repository_name
-        })
-
-    puts
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
   end
 
-  config.after(:suite) do
-    unless repository_name
-      variables = RSpec.configuration
-      configuration_directory = Paths.from_project_root_directory('src')
+  config.include_context :terraform
 
-      puts
-      puts "Destroying for repository name: #{variables.repository_name}"
-      puts
-
-      Terraform.clean
-      Terraform.destroy(
-          directory: configuration_directory,
-          force: true,
-          vars: {
-              region: variables.region,
-              repository_name: variables.repository_name
-          })
-
-      puts
-    end
-  end
+  config.before(:suite) { TerraformModule.provision }
+  config.after(:suite) { TerraformModule.destroy }
 end

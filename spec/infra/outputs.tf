@@ -1,6 +1,3 @@
-output "registry_id" {
-  value = "${module.ecr_repository.registry_id}"
-}
-output "repository_url" {
-  value = "${module.ecr_repository.repository_url}"
+output "bucket_name" {
+  value = "${module.encrypted_bucket.bucket_name}"
 }

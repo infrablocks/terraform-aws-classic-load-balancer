@@ -1,6 +1,3 @@
-output "registry_id" {
-  value = "${aws_ecr_repository.repository.registry_id}"
-}
-output "repository_url" {
-  value = "${aws_ecr_repository.repository.repository_url}"
+output "bucket_name" {
+  value = "${aws_s3_bucket.encrypted_bucket.bucket}"
 }

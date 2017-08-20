@@ -20,7 +20,7 @@ namespace :test do
 end
 
 RakeTerraform.define_command_tasks do |t|
-  t.configuration_name = 'ECR repository'
+  t.configuration_name = 'encrypted bucket module'
   t.source_directory = configuration.source_directory
   t.work_directory = configuration.work_directory
 

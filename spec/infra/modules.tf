@@ -1,6 +1,6 @@
-module "ecr_repository" {
+module "encrypted_bucket" {
   source = "../../../src"
 
   region = "${var.region}"
-  repository_name = "${var.repository_name}"
+  bucket_name = "${var.bucket_name}"
 }

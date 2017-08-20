@@ -1,2 +1,2 @@
 variable "region" {}
-variable "repository_name" {}
+variable "bucket_name" {}

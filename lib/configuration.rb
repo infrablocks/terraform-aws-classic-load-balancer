@@ -20,8 +20,8 @@ class Configuration
     File.join(work_directory, source_directory)
   end
 
-  def repository_name
-    ENV['REPOSITORY_NAME'] ||
+  def deployment_identifier
+    ENV['DEPLOYMENT_IDENTIFIER'] ||
         SecureRandom.hex[0, 8]
   end
 
@@ -33,7 +33,7 @@ class Configuration
   def vars
     @vars ||= Vars.load_from(vars_template_file, {
         project_directory: Paths.project_root_directory,
-        repository_name: repository_name
+        deployment_identifier: deployment_identifier
     })
   end
 end

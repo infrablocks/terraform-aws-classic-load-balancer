@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/terraform-aws-ecr-repository
+    working_directory: ~/terraform-aws-encryption-bucket
     docker:
       - image: ruby:2.3.1
     steps:

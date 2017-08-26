@@ -1,3 +1,3 @@
-output "bucket_name" {
-  value = "${aws_s3_bucket.encrypted_bucket.bucket}"
+output "elb_name" {
+  value = "${aws_elb.load_balancer.name}"
 }

@@ -1,3 +1,3 @@
-output "bucket_name" {
-  value = "${module.encrypted_bucket.bucket_name}"
+output "elb_name" {
+  value = "${module.classic_load_balancer.elb_name}"
 }

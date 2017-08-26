@@ -20,14 +20,18 @@ namespace :test do
 end
 
 RakeTerraform.define_command_tasks do |t|
-  t.configuration_name = 'encrypted bucket module'
+  t.argument_names = [:deployment_identifier]
+
+  t.configuration_name = 'classic load balancer module'
   t.source_directory = configuration.source_directory
   t.work_directory = configuration.work_directory
 
   t.state_file = configuration.state_file
 
-  t.vars = lambda do
-    configuration.vars.to_h
+  t.vars = lambda do |args|
+    configuration
+        .vars_for(args)
+        .to_h
   end
 end
 

@@ -1,2 +1,8 @@
 variable "region" {}
-variable "bucket_name" {}
+variable "subnet_ids" {
+  type = "list"
+}
+
+variable "listeners" {
+  type = "list"
+}

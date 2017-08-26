@@ -1,9 +1,9 @@
-Terraform AWS Encrypted Bucket
-==============================
+Terraform AWS Classic Load Balancer
+===================================
 
-[![CircleCI](https://circleci.com/gh/infrablocks/terraform-aws-encrypted-bucket.svg?style=svg)](https://circleci.com/gh/infrablocks/terraform-aws-encrypted-bucket)
+[![CircleCI](https://circleci.com/gh/infrablocks/terraform-aws-classic-load-balancer.svg?style=svg)](https://circleci.com/gh/infrablocks/terraform-aws-classic-load-balancer)
 
-A Terraform module for building an encrypted bucket in AWS S3.
+A Terraform module for building a classic load balancer in AWS.
 
 Usage
 -----
@@ -11,11 +11,10 @@ Usage
 To use the module, include something like the following in your terraform configuration:
 
 ```hcl-terraform
-module "encrypted_bucket" {
-  source = "git@github.com:infrablocks/terraform-aws-encrypted-bucket.git//src"
+module "classic_load_balancer" {
+  source = "git@github.com:infrablocks/terraform-aws-classic-load-balancer.git//src"
   
   region = "eu-west-2"
-  bucket_name = "my-organisations-encrypted-bucket"
 }
 ```
 
@@ -27,7 +26,6 @@ Executing `terraform get` will fetch the module.
 | Name                        | Description                                 | Default | Required |
 |-----------------------------|---------------------------------------------|:-------:|:--------:|
 | region                      | The region into which to deploy the VPC     | -       | yes      |
-| bucket_name                 | The name to use for the encrypted S3 bucket | -       | yes      |
 
 
 ### Outputs

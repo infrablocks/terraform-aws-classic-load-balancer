@@ -19,3 +19,20 @@ public_zone_id: 'Z4Q2X3ESOZT4N'
 private_zone_id: 'Z2CDAFD23Q10HO'
 
 infrastructure_events_bucket: 'tobyclemson-open-source'
+
+listeners: '[{instance_port = 80 instance_protocol = "http" lb_port = 80 lb_protocol = "http"}, {instance_port = 6567 instance_protocol = "tcp" lb_port = 6567 lb_protocol = "tcp"}]'
+
+health_check_target: 'HTTP:8080/api/ping'
+health_check_timeout: 10
+health_check_interval: 20
+health_check_unhealthy_threshold: 5
+health_check_healthy_threshold: 5
+
+enable_cross_zone_load_balancing: 'no'
+
+enable_connection_draining: 'yes'
+connection_draining_timeout: 60
+
+idle_timeout: 120
+
+expose_to_public_internet: 'no'

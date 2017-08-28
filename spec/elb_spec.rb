@@ -29,6 +29,11 @@ describe 'ELB' do
                  instance_protocol: vars.listener_2_instance_protocol,
                  instance_port: vars.listener_2_instance_port)}
 
+  it 'is associated with the load balancer security group' do
+    expect(subject)
+        .to(have_security_group("elb-#{component}-#{deployment_identifier}"))
+  end
+
   context 'tags' do
     subject do
       elb_client

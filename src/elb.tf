@@ -1,5 +1,8 @@
 resource "aws_elb" "load_balancer" {
   subnets = ["${var.subnet_ids}"]
+  security_groups = [
+    "${aws_security_group.load_balancer.id}"
+  ]
 
   internal = "${var.expose_to_public_internet == "yes" ? false : true}"
 

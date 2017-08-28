@@ -26,6 +26,10 @@ module "classic_load_balancer" {
   vpc_id = "${module.base_network.vpc_id}"
   subnet_ids = "${split(",", module.base_network.public_subnet_ids)}"
 
+  domain_name = "${var.domain_name}"
+  public_zone_id = "${var.public_zone_id}"
+  private_zone_id = "${var.private_zone_id}"
+
   component = "${var.component}"
   deployment_identifier = "${var.deployment_identifier}"
 
@@ -46,6 +50,9 @@ module "classic_load_balancer" {
   connection_draining_timeout = "${var.connection_draining_timeout}"
 
   idle_timeout = "${var.idle_timeout}"
+
+  include_public_dns_record = "${var.include_public_dns_record}"
+  include_private_dns_record = "${var.include_private_dns_record}"
 
   expose_to_public_internet = "${var.expose_to_public_internet}"
 }

@@ -41,4 +41,7 @@ variable "connection_draining_timeout" {}
 
 variable "idle_timeout" {}
 
+variable "include_public_dns_record" {}
+variable "include_private_dns_record" {}
+
 variable "expose_to_public_internet" {}

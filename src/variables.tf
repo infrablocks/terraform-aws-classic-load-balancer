@@ -4,6 +4,10 @@ variable "subnet_ids" {
   type = "list"
 }
 
+variable "domain_name" {}
+variable "public_zone_id" {}
+variable "private_zone_id" {}
+
 variable "component" {}
 variable "deployment_identifier" {}
 
@@ -48,6 +52,13 @@ variable "connection_draining_timeout" {
 
 variable "idle_timeout" {
   default = 60
+}
+
+variable "include_public_dns_record" {
+  default = "no"
+}
+variable "include_private_dns_record" {
+  default = "yes"
 }
 
 variable "expose_to_public_internet" {

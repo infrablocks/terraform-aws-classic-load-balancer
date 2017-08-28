@@ -30,6 +30,9 @@ module "classic_load_balancer" {
   deployment_identifier = "${var.deployment_identifier}"
 
   listeners = "${var.listeners}"
+  access_control = "${var.access_control}"
+
+  egress_cidrs = "${var.egress_cidrs}"
 
   health_check_target = "${var.health_check_target}"
   health_check_timeout = "${var.health_check_timeout}"

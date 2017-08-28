@@ -10,6 +10,14 @@ variable "deployment_identifier" {}
 variable "listeners" {
   type = "list"
 }
+variable "access_control" {
+  type = "list"
+}
+
+variable "egress_cidrs" {
+  type = "list"
+  default = []
+}
 
 variable "health_check_target" {
   default = "TCP:80"

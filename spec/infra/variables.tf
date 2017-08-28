@@ -20,6 +20,13 @@ variable "infrastructure_events_bucket" {}
 variable "listeners" {
   type = "list"
 }
+variable "access_control" {
+  type = "list"
+}
+
+variable "egress_cidrs" {
+  type = "list"
+}
 
 variable "health_check_target" {}
 variable "health_check_timeout" {}

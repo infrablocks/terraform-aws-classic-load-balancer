@@ -19,15 +19,15 @@ describe 'ELB' do
   its(:health_check_healthy_threshold) {should eq(vars.health_check_healthy_threshold)}
 
   it {should have_listener(
-                 protocol: 'HTTP',
-                 port: 80,
-                 instance_protocol: 'HTTP',
-                 instance_port: 80)}
+                 protocol: vars.listener_1_lb_protocol,
+                 port: vars.listener_1_lb_port,
+                 instance_protocol: vars.listener_1_instance_protocol,
+                 instance_port: vars.listener_1_instance_port)}
   it {should have_listener(
-                 protocol: 'TCP',
-                 port: 6567,
-                 instance_protocol: 'TCP',
-                 instance_port: 6567)}
+                 protocol: vars.listener_2_lb_protocol,
+                 port: vars.listener_2_lb_port,
+                 instance_protocol: vars.listener_2_instance_protocol,
+                 instance_port: vars.listener_2_instance_port)}
 
   context 'tags' do
     subject do

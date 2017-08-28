@@ -14,6 +14,10 @@ output "name" {
   value = "${module.classic_load_balancer.name}"
 }
 
+output "address" {
+  value = "${module.classic_load_balancer.address}"
+}
+
 output "security_group_id" {
   value = "${module.classic_load_balancer.security_group_id}"
 }

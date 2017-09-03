@@ -13,7 +13,7 @@ resource "aws_elb" "load_balancer" {
 
   idle_timeout = "${var.idle_timeout}"
 
-  listener = "${var.listeners}"
+  listener = ["${var.listeners}"]
 
   health_check {
     target = "${var.health_check_target}"

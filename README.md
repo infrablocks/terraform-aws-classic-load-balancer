@@ -35,7 +35,8 @@ configuration:
 
 ```hcl-terraform
 module "classic_load_balancer" {
-  source = "git@github.com:infrablocks/terraform-aws-classic-load-balancer.git//src"
+  source  = "infrablocks/classic-load-balancer/aws"
+  version = "0.1.7"
 
   region = "eu-west-2"
   vpc_id = "vpc-fb7dc365"

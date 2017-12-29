@@ -25,7 +25,7 @@ The ECS load balancer consists of:
   * In the public hosted zone if specified
   * In the private hosted zone if specified
 
-![Diagram of infrastructure managed by this module](/docs/architecture.png?raw=true)
+![Diagram of infrastructure managed by this module](https://raw.githubusercontent.com/infrablocks/terraform-aws-classic-load-balancer/master/docs/architecture.png)
 
 Usage
 -----
@@ -98,8 +98,6 @@ module "classic_load_balancer" {
   expose_to_public_internet = 'yes'
 }
 ```
-
-Executing `terraform get` will fetch the module.
 
 As mentioned above, the load balancer deploys into an existing base network. 
 Whilst the base network can be created using any mechanism you like, the 
@@ -211,16 +209,37 @@ execute:
 ./go
 ```
 
+To provision the module prerequisites:
+
+```bash
+./go deployment:prerequisites:provision[<deployment_identifier>]
+```
+
 To provision the module contents:
 
 ```bash
-./go provision[<deployment_identifier>]
+./go deployment:harness:provision[<deployment_identifier>]
 ```
 
 To destroy the module contents:
 
 ```bash
-./go destroy[<deployment_identifier>]
+./go deployment:harness:destroy[<deployment_identifier>]
+```
+
+To destroy the module prerequisites:
+
+```bash
+./go deployment:prerequisites:destroy[<deployment_identifier>]
+```
+
+
+### Common Tasks
+
+To generate an SSH key pair:
+
+```
+ssh-keygen -t rsa -b 4096 -C integration-test@example.com -N '' -f config/secrets/keys/bastion/ssh
 ```
 
 Contributing

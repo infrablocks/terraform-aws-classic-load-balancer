@@ -672,7 +672,7 @@ GEM
     rspec-support (3.8.0)
     ruby-terraform (0.15.0)
       lino (~> 1.1)
-    rubyzip (1.2.2)
+    rubyzip (2.0.0)
     semantic (1.6.1)
     term-ansicolor (1.7.0)
       tins (~> 1.0)

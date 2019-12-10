@@ -29,3 +29,5 @@ run/logs/
 # Terraform
 *.tfstate
 *.tfstate.backup
+!state/permanent.tfstate
+!state/permanent.tfstate.backup

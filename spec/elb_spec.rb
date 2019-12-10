@@ -1,33 +1,33 @@
 require 'spec_helper'
 
 describe 'ELB' do
-  let(:component) {vars.component}
-  let(:deployment_identifier) {vars.deployment_identifier}
+  let(:component) { vars.component }
+  let(:deployment_identifier) { vars.deployment_identifier }
 
-  let(:name) {output_for(:harness, 'name')}
+  let(:name) { output_for(:harness, 'name') }
 
-  subject {elb(name)}
+  subject { elb(name) }
 
-  it {should exist}
-  its(:subnets) {should contain_exactly(*output_for(:prerequisites, 'subnet_ids').split(','))}
-  its(:scheme) {should eq('internal')}
+  it { should exist }
+  its(:subnets) { should contain_exactly(*output_for(:prerequisites, 'subnet_ids', parse: true)) }
+  its(:scheme) { should eq('internal') }
 
-  its(:health_check_target) {should eq(vars.health_check_target)}
-  its(:health_check_timeout) {should eq(vars.health_check_timeout)}
-  its(:health_check_interval) {should eq(vars.health_check_interval)}
-  its(:health_check_unhealthy_threshold) {should eq(vars.health_check_unhealthy_threshold)}
-  its(:health_check_healthy_threshold) {should eq(vars.health_check_healthy_threshold)}
+  its(:health_check_target) { should eq(vars.health_check_target) }
+  its(:health_check_timeout) { should eq(vars.health_check_timeout) }
+  its(:health_check_interval) { should eq(vars.health_check_interval) }
+  its(:health_check_unhealthy_threshold) { should eq(vars.health_check_unhealthy_threshold) }
+  its(:health_check_healthy_threshold) { should eq(vars.health_check_healthy_threshold) }
 
-  it {should have_listener(
-                 protocol: vars.listener_1_lb_protocol,
-                 port: vars.listener_1_lb_port,
-                 instance_protocol: vars.listener_1_instance_protocol,
-                 instance_port: vars.listener_1_instance_port)}
-  it {should have_listener(
-                 protocol: vars.listener_2_lb_protocol,
-                 port: vars.listener_2_lb_port,
-                 instance_protocol: vars.listener_2_instance_protocol,
-                 instance_port: vars.listener_2_instance_port)}
+  it { should have_listener(
+      protocol: configuration.for(:harness).listener_1_lb_protocol,
+      port: configuration.for(:harness).listener_1_lb_port,
+      instance_protocol: configuration.for(:harness).listener_1_instance_protocol,
+      instance_port: configuration.for(:harness).listener_1_instance_port) }
+  it { should have_listener(
+      protocol: configuration.for(:harness).listener_2_lb_protocol,
+      port: configuration.for(:harness).listener_2_lb_port,
+      instance_protocol: configuration.for(:harness).listener_2_instance_protocol,
+      instance_port: configuration.for(:harness).listener_2_instance_port) }
 
   it 'outputs the zone ID' do
     expect(output_for(:harness, 'zone_id'))
@@ -53,11 +53,11 @@ describe 'ELB' do
           .map(&:to_h)
     end
 
-    it {should include({key: 'Name',
-                        value: "elb-#{component}-#{deployment_identifier}"})}
-    it {should include({key: 'Component', value: component})}
-    it {should include({key: 'DeploymentIdentifier',
-                        value: deployment_identifier})}
+    it { should include({key: 'Name',
+        value: "elb-#{component}-#{deployment_identifier}"}) }
+    it { should include({key: 'Component', value: component}) }
+    it { should include({key: 'DeploymentIdentifier',
+        value: deployment_identifier}) }
   end
 
   context 'attributes' do
@@ -98,7 +98,7 @@ describe 'ELB' do
       reprovision(expose_to_public_internet: 'yes')
     end
 
-    its(:scheme) {should eq('internet-facing')}
+    its(:scheme) { should eq('internet-facing') }
   end
 
   context 'when ELB is not exposed to the public internet' do
@@ -106,6 +106,6 @@ describe 'ELB' do
       reprovision(expose_to_public_internet: 'no')
     end
 
-    its(:scheme) {should eq('internal')}
+    its(:scheme) { should eq('internal') }
   end
 end

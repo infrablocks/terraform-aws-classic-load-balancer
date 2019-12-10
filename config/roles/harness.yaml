@@ -1,0 +1,50 @@
+---
+source_directory: "spec/infra/harness"
+state_file: "%{hiera('project_directory')}/state/harness.tfstate"
+
+listener_1_lb_port: "%{hiera('l1_lb_port')}"
+listener_1_lb_protocol: "%{hiera('l1_lb_protocol')}"
+listener_1_instance_port: "%{hiera('l1_instance_port')}"
+listener_1_instance_protocol: "%{hiera('l1_instance_protocol')}"
+listener_1_allow_cidr: "%{hiera('l1_allow_cidr')}"
+
+listener_2_lb_port: "%{hiera('l2_lb_port')}"
+listener_2_lb_protocol: "%{hiera('l2_lb_protocol')}"
+listener_2_instance_port: "%{hiera('l2_instance_port')}"
+listener_2_instance_protocol: "%{hiera('l2_instance_protocol')}"
+listener_2_ssl_certificate_id: "%{hiera('l2_ssl_certificate_id')}"
+listener_2_allow_cidr: "%{hiera('l2_allow_cidr')}"
+
+vars:
+  region: "%{hiera('region')}"
+
+  component: "%{hiera('component')}"
+  deployment_identifier: "%{hiera('deployment_identifier')}"
+
+  domain_name: "%{hiera('domain_name')}"
+  public_zone_id: "%{hiera('public_zone_id')}"
+  private_zone_id: "%{hiera('private_zone_id')}"
+
+  listeners: "%{hiera('listeners')}"
+
+  access_control: "%{hiera('access_control')}"
+
+  egress_cidrs: "%{hiera('egress_cidrs')}"
+
+  health_check_target: "%{hiera('health_check_target')}"
+  health_check_timeout: "%{hiera('health_check_timeout')}"
+  health_check_interval: "%{hiera('health_check_interval')}"
+  health_check_unhealthy_threshold: "%{hiera('health_check_unhealthy_threshold')}"
+  health_check_healthy_threshold: "%{hiera('health_check_healthy_threshold')}"
+
+  enable_cross_zone_load_balancing: "%{hiera('enable_cross_zone_load_balancing')}"
+
+  enable_connection_draining: "%{hiera('enable_connection_draining')}"
+  connection_draining_timeout: "%{hiera('connection_draining_timeout')}"
+
+  idle_timeout: "%{hiera('idle_timeout')}"
+
+  include_public_dns_record: "%{hiera('include_public_dns_record')}"
+  include_private_dns_record: "%{hiera('include_private_dns_record')}"
+
+  expose_to_public_internet: "%{hiera('expose_to_public_internet')}"

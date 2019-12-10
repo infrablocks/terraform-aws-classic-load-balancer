@@ -8,14 +8,24 @@ variable "public_zone_id" {}
 variable "private_zone_id" {}
 
 variable "listeners" {
-  type = "list"
+  type = list(object({
+    lb_port: number
+    lb_protocol: string
+    instance_port: number
+    instance_protocol: string
+    ssl_certificate_id: string
+  }))
 }
 variable "access_control" {
-  type = "list"
+  type = list(object({
+    lb_port: number
+    instance_port: number
+    allow_cidrs: list(string)
+  }))
 }
 
 variable "egress_cidrs" {
-  type = "list"
+  type = list(string)
 }
 
 variable "health_check_target" {}

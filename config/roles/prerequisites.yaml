@@ -1,0 +1,15 @@
+---
+source_directory: "spec/infra/prerequisites"
+state_file: "%{hiera('project_directory')}/state/prerequisites.tfstate"
+vars:
+  region: "%{hiera('region')}"
+
+  component: "%{hiera('component')}"
+  deployment_identifier: "%{hiera('deployment_identifier')}"
+
+  vpc_cidr: "%{hiera('vpc_cidr')}"
+  availability_zones: "%{hiera('availability_zones')}"
+
+  dependencies: "%{hiera('dependencies')}"
+
+  private_zone_id: "%{hiera('private_zone_id')}"

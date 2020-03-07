@@ -20,20 +20,20 @@ describe 'Security Groups' do
       expect(subject.inbound_rule_count).to(eq(2))
 
       ingress_rule_1 = subject.ip_permissions.find do |permission|
-        permission.from_port == configuration.for(:harness).listener_1_lb_port
+        permission.from_port == configuration.for(:harness).listener_1_lb_port.to_i
       end
       ingress_rule_2 = subject.ip_permissions.find do |permission|
-        permission.from_port == configuration.for(:harness).listener_2_lb_port
+        permission.from_port == configuration.for(:harness).listener_2_lb_port.to_i
       end
 
       expect(ingress_rule_1.to_port)
-          .to(eq(configuration.for(:harness).listener_1_lb_port))
+          .to(eq(configuration.for(:harness).listener_1_lb_port.to_i))
       expect(ingress_rule_1.ip_protocol).to(eq('tcp'))
       expect(ingress_rule_1.ip_ranges.map(&:cidr_ip))
           .to(eq([configuration.for(:harness).listener_1_allow_cidr]))
 
       expect(ingress_rule_2.to_port)
-          .to(eq(configuration.for(:harness).listener_2_lb_port))
+          .to(eq(configuration.for(:harness).listener_2_lb_port.to_i))
       expect(ingress_rule_2.ip_protocol).to(eq('tcp'))
       expect(ingress_rule_2.ip_ranges.map(&:cidr_ip))
           .to(eq([configuration.for(:harness).listener_2_allow_cidr]))
@@ -97,20 +97,20 @@ describe 'Security Groups' do
       expect(subject.inbound_rule_count).to(eq(2))
 
       ingress_rule_1 = subject.ip_permissions.find do |permission|
-        permission.from_port == configuration.for(:harness).listener_1_instance_port
+        permission.from_port == configuration.for(:harness).listener_1_instance_port.to_i
       end
       ingress_rule_2 = subject.ip_permissions.find do |permission|
-        permission.from_port == configuration.for(:harness).listener_2_instance_port
+        permission.from_port == configuration.for(:harness).listener_2_instance_port.to_i
       end
 
       expect(ingress_rule_1.to_port)
-          .to(eq(configuration.for(:harness).listener_1_instance_port))
+          .to(eq(configuration.for(:harness).listener_1_instance_port.to_i))
       expect(ingress_rule_1.ip_protocol).to(eq('tcp'))
       expect(ingress_rule_1.user_id_group_pairs[0].group_id)
           .to(eq(load_balancer_security_group.id))
 
       expect(ingress_rule_2.to_port)
-          .to(eq(configuration.for(:harness).listener_2_instance_port))
+          .to(eq(configuration.for(:harness).listener_2_instance_port.to_i))
       expect(ingress_rule_2.ip_protocol).to(eq('tcp'))
       expect(ingress_rule_2.user_id_group_pairs[0].group_id)
           .to(eq(load_balancer_security_group.id))

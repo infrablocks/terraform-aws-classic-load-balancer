@@ -13,21 +13,21 @@ describe 'ELB' do
   its(:scheme) { should eq('internal') }
 
   its(:health_check_target) { should eq(vars.health_check_target) }
-  its(:health_check_timeout) { should eq(vars.health_check_timeout) }
-  its(:health_check_interval) { should eq(vars.health_check_interval) }
-  its(:health_check_unhealthy_threshold) { should eq(vars.health_check_unhealthy_threshold) }
-  its(:health_check_healthy_threshold) { should eq(vars.health_check_healthy_threshold) }
+  its(:health_check_timeout) { should eq(vars.health_check_timeout.to_i) }
+  its(:health_check_interval) { should eq(vars.health_check_interval.to_i) }
+  its(:health_check_unhealthy_threshold) { should eq(vars.health_check_unhealthy_threshold.to_i) }
+  its(:health_check_healthy_threshold) { should eq(vars.health_check_healthy_threshold.to_i) }
 
   it { should have_listener(
       protocol: configuration.for(:harness).listener_1_lb_protocol,
-      port: configuration.for(:harness).listener_1_lb_port,
+      port: configuration.for(:harness).listener_1_lb_port.to_i,
       instance_protocol: configuration.for(:harness).listener_1_instance_protocol,
-      instance_port: configuration.for(:harness).listener_1_instance_port) }
+      instance_port: configuration.for(:harness).listener_1_instance_port.to_i) }
   it { should have_listener(
       protocol: configuration.for(:harness).listener_2_lb_protocol,
-      port: configuration.for(:harness).listener_2_lb_port,
+      port: configuration.for(:harness).listener_2_lb_port.to_i,
       instance_protocol: configuration.for(:harness).listener_2_instance_protocol,
-      instance_port: configuration.for(:harness).listener_2_instance_port) }
+      instance_port: configuration.for(:harness).listener_2_instance_port.to_i) }
 
   it 'outputs the zone ID' do
     expect(output_for(:harness, 'zone_id'))
@@ -82,14 +82,14 @@ describe 'ELB' do
       expect(connection_draining_attribute.enabled)
           .to(eq(connection_draining_enabled))
       expect(connection_draining_attribute.timeout)
-          .to(eq(vars.connection_draining_timeout))
+          .to(eq(vars.connection_draining_timeout.to_i))
     end
 
     it 'uses the provided idle timeout' do
       connection_settings_attribute = subject.connection_settings
 
       expect(connection_settings_attribute.idle_timeout)
-          .to(eq(vars.idle_timeout))
+          .to(eq(vars.idle_timeout.to_i))
     end
   end
 

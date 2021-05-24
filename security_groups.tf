@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "elb_egress" {
   from_port = 1
   to_port = 65535
   protocol = "tcp"
-  cidr_blocks = coalescelist(var.egress_cidrs, list(data.aws_vpc.base_network.cidr_block))
+  cidr_blocks = coalescelist(var.egress_cidrs, [data.aws_vpc.base_network.cidr_block])
 
   security_group_id = aws_security_group.load_balancer.id
 }

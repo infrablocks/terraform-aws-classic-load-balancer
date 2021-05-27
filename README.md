@@ -107,7 +107,9 @@ module will create everything you need. See the
 [docs](https://github.com/tobyclemson/terraform-aws-base-networking/blob/master/README.md)
 for usage instructions.
 
-
+See the 
+[Terraform registry entry](https://registry.terraform.io/modules/infrablocks/classic-load-balancer/aws/latest) 
+for more details.
 ### Inputs
 
 | Name                             | Description                                                                   | Default             | Required                             |
@@ -147,6 +149,10 @@ for usage instructions.
 | security_group_id                       | The ID of the ELB security group                          |
 | open_to_load_balancer_security_group_id | The ID of the security group allowing access from the ELB |
 
+### Compatibility
+
+This module is compatible with Terraform versions greater than or equal to 
+Terraform 0.14.
 
 Development
 -----------

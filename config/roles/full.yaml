@@ -1,10 +1,9 @@
 ---
-configuration_directory: "%{cwd}/spec/unit/infra/prerequisites"
-state_file: "%{cwd}/state/prerequisites.tfstate"
+configuration_directory: "%{cwd}/examples/full"
+state_file: "%{cwd}/state/full.tfstate"
 vars:
   region: "%{hiera('region')}"
   availability_zones: "%{hiera('availability_zones')}"
-
   vpc_cidr: "%{hiera('vpc_cidr')}"
 
   component: "%{hiera('component')}"

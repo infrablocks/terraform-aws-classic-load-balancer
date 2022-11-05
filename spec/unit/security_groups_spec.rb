@@ -74,7 +74,7 @@ describe 'security groups' do
         .to(include_resource_creation(type: 'aws_security_group_rule')
               .with_attribute_value(:type, 'egress')
               .with_attribute_value(:from_port, 1)
-              .with_attribute_value(:to_port, 65535)
+              .with_attribute_value(:to_port, 65_535)
               .with_attribute_value(:protocol, 'tcp'))
     end
 
@@ -173,7 +173,7 @@ describe 'security groups' do
        'the load balancer port and provided allowed CIDRs' do
       expect(@plan)
         .to(include_resource_creation(type: 'aws_security_group_rule',
-                                          name: 'elb_ingress')
+                                      name: 'elb_ingress')
                   .with_attribute_value(:type, 'ingress')
                   .with_attribute_value(:from_port, 80)
                   .with_attribute_value(:to_port, 80)
@@ -185,7 +185,7 @@ describe 'security groups' do
        'group for the instance port' do
       expect(@plan)
         .to(include_resource_creation(type: 'aws_security_group_rule',
-                                          name: 'open_to_elb_ingress')
+                                      name: 'open_to_elb_ingress')
                   .with_attribute_value(:type, 'ingress')
                   .with_attribute_value(:from_port, 8080)
                   .with_attribute_value(:to_port, 8080)
@@ -226,7 +226,7 @@ describe 'security groups' do
       @access_control_rules.each do |rule|
         expect(@plan)
           .to(include_resource_creation(type: 'aws_security_group_rule',
-                                            name: 'elb_ingress')
+                                        name: 'elb_ingress')
                     .with_attribute_value(:type, 'ingress')
                     .with_attribute_value(:from_port, rule[:lb_port])
                     .with_attribute_value(:to_port, rule[:lb_port])
@@ -240,7 +240,7 @@ describe 'security groups' do
       @access_control_rules.each do |rule|
         expect(@plan)
           .to(include_resource_creation(type: 'aws_security_group_rule',
-                                            name: 'open_to_elb_ingress')
+                                        name: 'open_to_elb_ingress')
                     .with_attribute_value(:type, 'ingress')
                     .with_attribute_value(:from_port, rule[:instance_port])
                     .with_attribute_value(:to_port, rule[:instance_port])
@@ -272,7 +272,7 @@ describe 'security groups' do
         .to(include_resource_creation(type: 'aws_security_group_rule')
               .with_attribute_value(:type, 'egress')
               .with_attribute_value(:from_port, 1)
-              .with_attribute_value(:to_port, 65535)
+              .with_attribute_value(:to_port, 65_535)
               .with_attribute_value(:protocol, 'tcp')
               .with_attribute_value(:cidr_blocks, @egress_cidrs))
     end

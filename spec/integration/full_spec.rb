@@ -160,7 +160,7 @@ describe 'full' do
       }
 
       it {
-        expect(subject)
+        expect(tags)
           .to(include(
                 key: 'Component',
                 value: component
@@ -196,7 +196,7 @@ describe 'full' do
           load_balancer_attributes.connection_draining
 
         expect(connection_draining_attribute.enabled)
-          .to(eq(true))
+          .to(be(true))
       end
 
       it 'uses a connection draining timeout of 5 minutes' do

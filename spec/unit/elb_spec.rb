@@ -174,7 +174,8 @@ describe 'ELB' do
                     ssl_certificate_id:
                       output(role: :prerequisites, name: 'certificate_arn')
                   }
-                )))
+                )
+              ))
     end
   end
 

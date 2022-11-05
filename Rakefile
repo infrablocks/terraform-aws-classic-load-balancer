@@ -184,22 +184,6 @@ namespace :test do
 end
 
 namespace :deployment do
-  namespace :permanent do
-    RakeTerraform.define_command_tasks(
-      configuration_name: 'permanent',
-      argument_names: [:deployment_identifier]
-    ) do |t, args|
-      deployment_configuration =
-        configuration.for(:permanent, args)
-
-      t.source_directory = deployment_configuration.source_directory
-      t.work_directory = deployment_configuration.work_directory
-
-      t.state_file = deployment_configuration.state_file
-      t.vars = deployment_configuration.vars
-    end
-  end
-
   namespace :prerequisites do
     RakeTerraform.define_command_tasks(
       configuration_name: 'prerequisites',

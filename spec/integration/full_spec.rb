@@ -82,7 +82,7 @@ describe 'full' do
 
     its(:subnets) do
       is_expected
-        .to(contain_exactly(*output(role: :full, name: 'subnet_ids')))
+        .to(match_array(output(role: :full, name: 'subnet_ids')))
     end
 
     its(:scheme) { is_expected.to eq('internet-facing') }
